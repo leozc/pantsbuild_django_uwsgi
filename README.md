@@ -1,7 +1,9 @@
-This is an example to demostrate how to setup pants + python + django + wsgi runner
+## This is an example to demonstrate how to integrate pantsbuild + python + django + wsgi runner.
+
 
 Steps:
     # Install dependencies for running uwsgi
+
     pip install pex uwsgi
     # Build
     ./pants binary   examples/src/python/djangoHelloMain
