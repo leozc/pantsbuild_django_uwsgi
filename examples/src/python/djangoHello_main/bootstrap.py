@@ -1,7 +1,7 @@
 import os
 import sys
 #pip install pex
-#uwsgi --http :8080 -p4 --import examples/src/python/djangoHelloMain/bootstrap.py --env UWSGI_PEX=dist/djangoHelloMain.pex --module 'djangoHello:wsgi'
+#uwsgi --http :8080 -p4 --import examples/src/python/djangoHello_main/bootstrap.py --env UWSGI_PEX=dist/djangoHello_main.pex --module 'djangoHello:wsgi'
 
 def activate_pex():
   entry_point = os.environ.get('UWSGI_PEX')
