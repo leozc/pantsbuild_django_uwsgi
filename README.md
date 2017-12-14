@@ -8,6 +8,9 @@ e.g.
 ./pants  -ldebug binary   examples/src/python/djangoHello_main::  # works
 ./dist/djangoHello_main.pex runserver # works
 
+./pants  -ldebug repl   examples/src/python/djangoHello_main::  # works
+> import djangoHello_main
+
 
 ./pants  -ldebug run.py examples/src/python/djangoHello_main:: --run-py-args="runserver" # works
 
