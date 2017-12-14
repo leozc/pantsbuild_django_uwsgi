@@ -2,8 +2,12 @@
 import os
 import sys
 
+from pprint import pprint
+
 
 print (">> loaded script properly")
+
+pprint(sys.path)
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangoHello.settings")
 
