@@ -6,8 +6,9 @@
 python_library(name='djangoHello',
   dependencies=[
     '3rdparty/python:Django',
-    '3rdparty/python:django-core',
-    'examples/src/python/greet:greet', # pretent we need this 
+    #'3rdparty/python:django-core', # enable this line and disable line below to demostrate build break
+    '3rdparty_src/python/django-core', #enable this line and disable line above to show "just work"
+    'examples/src/python/greet:greet', # pretent we need this
   ],
   sources=globs('*.py'),
 )

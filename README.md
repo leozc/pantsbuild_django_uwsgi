@@ -393,3 +393,5 @@ Exception message: Package SourcePackage(u'file:///Users/leo/dev/tmp/pantsbuild_
 The error happens within Django and observed in Pants 1.4 context while 1.2.1 is just fine (after performing pip install django)
 
 In high level, in pants 1.2, the context of the local python environment can [leak|https://github.com/pantsbuild/pex/issues/302] into the wheel, yet the latest pants fixed the issue.
+
+Alternatively, if we port the django_core into 3rdparty_src, and source accordingly, it works; Django-core doesn't have a wheel package, which I suspect there is some mis-translation here and there...
