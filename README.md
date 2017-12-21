@@ -66,51 +66,6 @@ FAILURE: /usr/bin/python2.7 djangoHello_main.manage runserver ... exited non-zer
 ```
 
 ## Observation
-The error happens within Django and observed in Pants 1.3 context while 1.2.1 is just fine and here is output for a good run
+The error happens within Django and observed in Pants 1.4 context while 1.2.1 is just fine (after performing pip install django)
 
-Here is the log for 1.2.1 - which it works
-```
-
-stderr:
-Traceback (most recent call last):
-  File "<stdin>", line 7, in <module>
-  File "setup.py", line 39, in <module>
-    classifiers=classifiers
-  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/distutils/core.py", line 111, in setup
-    _setup_distribution = dist = klass(attrs)
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 315, in __init__
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 361, in fetch_build_eggs
-  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 846, in resolve
-  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 1118, in best_match
-  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 1130, in obtain
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 429, in fetch_build_egg
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 665, in easy_install
-
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 695, in install_item
-
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 876, in install_eggs
-
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 1115, in build_and_install
-
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 1101, in run_setup
-
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 251, in run_setup
-  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 35, in __exit__
-    self.gen.throw(type, value, traceback)
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 198, in setup_context
-  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 35, in __exit__
-    self.gen.throw(type, value, traceback)
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 169, in save_modules
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 144, in resume
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 157, in save_modules
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 198, in setup_context
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 248, in run_setup
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 278, in run
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 246, in runner
-  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 47, in _execfile
-  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/setup.py", line 32, in <module>
-    license='MIT',
-  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/django/__init__.py", line 1, in <module>
-  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/django/utils/version.py", line 61, in <module>
-AttributeError: 'module' object has no attribute 'lru_cache'
-```
+In high level, in pants 1.2, the context of the local python environment can [leak|https://github.com/pantsbuild/pex/issues/302] into the wheel, yet the latest pants fixed the issue.
