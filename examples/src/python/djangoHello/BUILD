@@ -6,6 +6,7 @@
 python_library(name='djangoHello',
   dependencies=[
     '3rdparty/python:Django',
+    '3rdparty/python:django-core',
     'examples/src/python/greet:greet', # pretent we need this 
   ],
   sources=globs('*.py'),
