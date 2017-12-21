@@ -1,19 +1,6 @@
-## Django has problem with run.py but PEX is fine
-### Good cases
-./pants  -ldebug run.py   examples/src/python/main:: # works
-./pants  -ldebug binary   examples/src/python/main::
-./dist/main.pex # works
-
-
-./pants  -ldebug binary   examples/src/python/djangoHello_main::  # works
-./dist/djangoHello_main.pex runserver # works
-
-
-./pants  -ldebug repl   examples/src/python/djangoHello_main::  # works
-> import djangoHello_main
-
+## Pants failed to resolve django core
 ### Failures
-This falure can only be observed from Pants 1.3.x, it works on 1.2.x and 1.4.x, which I can assume it is a regression(?!)
+This falure can only be observed consistently from Pants 1.3 and above, it works on 1.2.x (when you install the Django 1.8.x manually into your venv), which I assume it is a bug in Pants 1.2.x (as a feature)
 ./pants  -ldebug run.py examples/src/python/djangoHello_main:: --run-py-args="runserver" # failed
 
 ```
@@ -392,6 +379,8 @@ Exception message: Package SourcePackage(u'file:///Users/leo/dev/tmp/pantsbuild_
 ## Observation
 The error happens within Django and observed in Pants 1.4 context while 1.2.1 is just fine (after performing pip install django)
 
-In high level, in pants 1.2, the context of the local python environment can [leak|https://github.com/pantsbuild/pex/issues/302] into the wheel, yet the latest pants fixed the issue.
+In high level, in pants 1.2, the context of the local python environment can [leak|https://github.com/pantsbuild/pex/issues/302] into the wheel, yet the latest PantsBuild/PEX fixed the issue, and make this repro consistent.
 
-Alternatively, if we port the django_core into 3rdparty_src, and source accordingly, it works; Django-core doesn't have a wheel package, which I suspect there is some mis-translation here and there...
+I can almost certain that the package requirement of django-core is bad. 
+
+The good local fix: if we port the django_core into 3rdparty_src, and source it accordingly, we solve the problem; Django-core doesn't have a wheel package, which I suspect there is some mis-translation here and there...
