@@ -70,62 +70,47 @@ The error happens within Django and observed in Pants 1.3 context while 1.2.1 is
 
 Here is the log for 1.2.1 - which it works
 ```
-07:56:21 00:22       [run]
-mod_name __main__
-loader_name <pkgutil.ImpLoader instance at 0x7f68355665f0>
-mod_name djangoHello_main.manage
-loader_name <pkgutil.ImpLoader instance at 0x7f6832c58a28>
->> loaded script properly
->> load Django in main ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/python-setup/chroots/d0c4cd781ae4672091a1d8dec5ed4151c095242e', 'runserver']
->> load Django with sys arg ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/python-setup/chroots/d0c4cd781ae4672091a1d8dec5ed4151c095242e', 'runserver']
-mod_name __main__
-loader_name <pkgutil.ImpLoader instance at 0x7f481a5235f0>
-mod_name djangoHello_main.manage
-loader_name <pkgutil.ImpLoader instance at 0x7f4817c15ab8>
->> loaded script properly
->> load Django in main ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/python-setup/chroots/d0c4cd781ae4672091a1d8dec5ed4151c095242e', 'runserver']
->> load Django with sys arg ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/python-setup/chroots/d0c4cd781ae4672091a1d8dec5ed4151c095242e', 'runserver']
-Performing system checks...
 
-System check identified no issues (0 silenced).
-December 14, 2017 - 07:56:25
-Django version 1.8.12, using settings 'djangoHello.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
-```
+stderr:
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "setup.py", line 39, in <module>
+    classifiers=classifiers
+  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/distutils/core.py", line 111, in setup
+    _setup_distribution = dist = klass(attrs)
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 315, in __init__
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 361, in fetch_build_eggs
+  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 846, in resolve
+  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 1118, in best_match
+  File "build/bdist.macosx-10.12-x86_64/egg/pkg_resources/__init__.py", line 1130, in obtain
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/dist.py", line 429, in fetch_build_egg
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 665, in easy_install
 
-Here is the log for 1.4.0dev23, also works
-```
-mod_name __main__
-loader_name <pkgutil.ImpLoader instance at 0x7f0bc0ba25f0>
-mod_name djangoHello_main.manage
-loader_name <pkgutil.ImpLoader instance at 0x7f0bbe321638>
->> loaded script properly
->> load Django in main ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/cf2dee7c122bc5cc20ddfecdc367514250b66994', 'runserver']
->> load Django with sys arg ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/cf2dee7c122bc5cc20ddfecdc367514250b66994', 'runserver'
-mod_name __main__
-loader_name <pkgutil.ImpLoader instance at 0x7fec7099c5f0>
-mod_name djangoHello_main.manage
-loader_name <pkgutil.ImpLoader instance at 0x7fec6e49e638>
->> loaded script properly
-['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/b784198a008f4efc77a24487b252606596286fa1/.bootstrap',
- '/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/b784198a008f4efc77a24487b252606596286fa1',
- '/usr/lib/python2.7',
- '/usr/lib/python2.7/plat-x86_64-linux-gnu',
- '/usr/lib/python2.7/lib-tk',
- '/usr/lib/python2.7/lib-old',
- '/usr/lib/python2.7/lib-dynload',
- u'/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/pyprep/requirements/CPython-2.7.12/2b0c6c6d56fdad60f65820763b9a038a9a2da81e',
- u'/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/pyprep/sources/ab2078c152f58c74543a04bdb339a109cd01f2b8',
- u'/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/pyprep/requirements/CPython-2.7.12/2b0c6c6d56fdad60f65820763b9a038a9a2da81e/.deps/ansicolors-1.0.2-py2-none-any.whl',
- u'/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/pyprep/requirements/CPython-2.7.12/2b0c6c6d56fdad60f65820763b9a038a9a2da81e/.deps/Django-1.8.12-py2.py3-none-any.whl']
->> load Django in main ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/cf2dee7c122bc5cc20ddfecdc367514250b66994', 'runserver']
->> load Django with sys arg ['/mnt/tmp/pantsbuild_django_uwsgi/.pants.d/run/py/CPython-2.7.12/cf2dee7c122bc5cc20ddfecdc367514250b66994', 'runserver']
-Performing system checks...
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 695, in install_item
 
-System check identified no issues (0 silenced).
-December 14, 2017 - 08:10:28
-Django version 1.8.12, using settings 'djangoHello.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 876, in install_eggs
+
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 1115, in build_and_install
+
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/command/easy_install.py", line 1101, in run_setup
+
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 251, in run_setup
+  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 35, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 198, in setup_context
+  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 35, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 169, in save_modules
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 144, in resume
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 157, in save_modules
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 198, in setup_context
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 248, in run_setup
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 278, in run
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 246, in runner
+  File "build/bdist.macosx-10.12-x86_64/egg/setuptools/sandbox.py", line 47, in _execfile
+  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/setup.py", line 32, in <module>
+    license='MIT',
+  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/django/__init__.py", line 1, in <module>
+  File "/var/folders/lw/22q0mxgn2x37dmd2j7chl_vc0000gp/T/easy_install-iNpBii/Django-2.0/django/utils/version.py", line 61, in <module>
+AttributeError: 'module' object has no attribute 'lru_cache'
 ```
