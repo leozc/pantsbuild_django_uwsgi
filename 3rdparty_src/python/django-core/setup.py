@@ -34,7 +34,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     setup_requires=[
-        'django >= 1.7',
+        'django >= 1.8.0,<1.9',
     ],
     classifiers=classifiers
 )
